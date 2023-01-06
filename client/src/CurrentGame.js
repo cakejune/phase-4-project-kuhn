@@ -11,6 +11,8 @@ export default function CurrentGame({ user }) {
   const [teamAPlayers, setTeamAPlayers] = useState([]);
   const [teamBPlayers, setTeamBPlayers] = useState([]);
   const [showAddPlayer, setShowAddPlayer] = useState(false);
+  const [currentClue, setCurrentClue] = useState("Clue Will Appear Here");
+  const [actor, setActor] = useState(null)
 
   useEffect(() => {
     if (userGame) {
@@ -62,6 +64,29 @@ export default function CurrentGame({ user }) {
   function handleAddTeamB(){
 
   }
+
+  function showAClue(){
+    if (activeGame.teams && activeGame.teams[0]){
+      setCurrentClue(activeGame.teams[0].clues[Math.floor(Math.random()*activeGame.teams[0].clues.length)])
+    }
+  }
+  function showBClue(){
+    if (activeGame.teams && activeGame.teams[1]){
+      setCurrentClue(activeGame.teams[1].clues[Math.floor(Math.random()*activeGame.teams[1].clues.length)])
+    }
+  }
+
+  function generateActor(){
+    if (activeGame.teams && activeGame.teams[0]){
+      setActor(activeGame.teams[0].members[Math.floor(Math.random()*activeGame.teams[0].members.length)].nickname)
+    }
+  }
+  function generateBActor(){
+    if (activeGame.teams && activeGame.teams[1]){
+      setActor(activeGame.teams[1].members[Math.floor(Math.random()*activeGame.teams[1].members.length)].nickname)
+    }
+  }
+
   function minimize() {}
 
   function maximize() {}
@@ -109,12 +134,7 @@ export default function CurrentGame({ user }) {
                   />
                 ) : null}
               </div>
-              <button
-                id="start-game-btn"
-                onClick={() => console.log("startRound")}
-              >
-                Start Game
-              </button>
+              
             </div>
             <div className="team-list right">
               <h3 style={{paddingBottom: '30px'}}>Team 2: {activeGame.teams && activeGame.teams[1] ? activeGame.teams[1].name : ""}</h3>
@@ -132,20 +152,30 @@ export default function CurrentGame({ user }) {
           <div className="bottom-half-container" style={{ display: "flex" }}>
             <div className="team-info left">
               <ul>
-                <li>Player 4</li>
-                <li>Player 5</li>
-                <li>Player 6</li>
+                {/* generate clue here */}
+                <button onClick={showAClue}>Generate Clue</button>
+                <button className="choose-player" onClick={generateBActor}>Generate Actor</button>
+               
               </ul>
             </div>
-            <div className="chat-box">{/* Chat functionality goes here */}</div>
+            <div className="chat-box">
+              <div className="current-actor">{actor ? `${actor}, you're up!` : "Chosen actor will appear here"}</div>
+              <div className="current-clue-container">{currentClue ? currentClue : "Clue Will Appear Here"}</div>
+              </div>
+              
             <div className="team-info right">
               <ul>
-                <li>Player 4</li>
-                <li>Player 5</li>
-                <li>Player 6</li>
+              <button onClick={showBClue}>Generate Clue</button>
+              <button className="choose-player" onClick={generateActor}>Generate Actor</button>
               </ul>
             </div>
           </div>
+            <button
+                id="start-game-btn"
+                onClick={() => console.log("startRound")}
+              >
+                Start Game
+              </button>
         </div>
       </div>
 : <p>You do not have an active game</p> }
