@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
   
-  resources :user_in_games
-  resources :games
+  # resources :user_in_games
+  get '/players/:id', to: "user_in_games#show"
+  get '/players', to: "user_in_games#index"
+  post '/addplayer', to: "user_in_games#create"
+  post '/games/', to: "games#create"
+  get '/games/:id', to: "games#show"
+  get '/games/', to: "games#index"
+  post '/newgame', to: "games#user_new_game"
+  
   # resources :teams
   get '/teams/:id', to: "teams#show"
   get '/teams', to: "teams#index"

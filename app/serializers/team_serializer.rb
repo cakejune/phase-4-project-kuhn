@@ -1,5 +1,5 @@
 class TeamSerializer < ActiveModel::Serializer
-  attributes :name, :points, :victory, :current_game_id, :team_clues
+  attributes :id, :name, :points, :victory, :current_game_id, :team_clues
   # has_many :user_in_games, Serializer: UserInGamesInTeamsSerializer
 
   def current_game_id

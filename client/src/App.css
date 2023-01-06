@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -27,7 +27,108 @@
 .App-link {
   color: #61dafb;
 }
+ */
 
-.createNewGame {
-  display: flex
+/* Lobby Window CSS */
+.whole-game-container {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+.lobby-container {
+  display: flex;
+  justify-content: space-evenly;
+  /* height: 800px; */
+  margin: 0;
+}
+.bottom-half-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 200px;
+  margin: 0;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+  width: 100%;
+}
+
+.top-bar-title {
+  text-align: center;
+}
+
+.top-bar button {
+  height: 100%;
+  width: 30px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.center-window {
+  display: flex;
+  /* justify-content: center;
+  align-items: center; */
+  /* margin: 0 auto; */
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+/* .center-window img {
+  height: 90%;
+  width: 90%;
+} */
+
+.team-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  /* height: 540px; */
+  /* width: 200px; */
+}
+
+.team-list h3 {
+  margin: 0;
+}
+
+.team-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 260px;
+  width: 200px;
+}
+
+.chat-box {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 140px;
+  width: 600px;
+  border: 1px solid black;
+}
+
+/*Create New Game */
+
+.team-a-div {
+  display: flex;
+  flex-direction: column;
+}
+.team-b-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.active-game.selected {
+  background-color: #00ccff;
 }

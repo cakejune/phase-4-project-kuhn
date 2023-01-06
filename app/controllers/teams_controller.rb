@@ -19,4 +19,6 @@ class TeamsController < ApplicationController
     def team_params
     params.permit(:name)
     end
+
+    
 end

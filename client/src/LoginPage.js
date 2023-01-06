@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function LoginPage({ onLogin }) {
   
@@ -22,7 +23,7 @@ export default function LoginPage({ onLogin }) {
       } else {
         res.json().then((err) => {
           setErrors(err.errors.map((er)=> er));
-          alert(`Error(s): ${errors}`);
+          alert(`Error(s): ${err.errors}`);
           
         });
       }
@@ -53,7 +54,10 @@ export default function LoginPage({ onLogin }) {
           />
         </label>
         <label>
-          <button type="submit">submit</button>
+          {/* <NavLink onClick={handleSubmit} className="nav-link" to="/">
+        Log In
+      </NavLink> */}
+          <button type="submit">Log In</button>
         </label>
       </form>
     </>

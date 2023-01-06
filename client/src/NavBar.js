@@ -8,7 +8,7 @@ export default function Navbar() {
         Home
       </NavLink>
       <NavLink className="nav-link" to="/newgame">
-        Create New Game
+        New Game
       </NavLink>
       <NavLink className="nav-link" to="/profile">
         My Profile
