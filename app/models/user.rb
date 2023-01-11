@@ -3,6 +3,7 @@ class User < ApplicationRecord
     has_many :user_in_games
     has_many :teams, through: :user_in_games
     has_many :games, through: :user_in_games
+    has_many :chat_channels
     
 
     validates :username, presence: true, uniqueness: true

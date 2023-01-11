@@ -16,6 +16,10 @@ export default function Navbar() {
       <NavLink className="nav-link" to="/currentgame">
         Current Game
       </NavLink>
+      <NavLink className="nav-link" to="/chat">
+        Chat
+      </NavLink>
+     
     </>
   );
 }

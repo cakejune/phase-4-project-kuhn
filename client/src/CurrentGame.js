@@ -12,7 +12,9 @@ export default function CurrentGame({ user }) {
   const [teamBPlayers, setTeamBPlayers] = useState([]);
   const [showAddPlayer, setShowAddPlayer] = useState(false);
   const [currentClue, setCurrentClue] = useState("Clue Will Appear Here");
-  const [actor, setActor] = useState(null)
+  const [actor, setActor] = useState(null);
+  const [roundTeam, setRoundTeam] = useState(null)
+  const [time, setTime] = useState(60)
 
   useEffect(() => {
     if (userGame) {
@@ -27,6 +29,29 @@ export default function CurrentGame({ user }) {
       );
     }
   }, [userGame]);
+
+  const [intervalId, setIntervalId] = useState(null);
+
+  useEffect(() => {
+    if (time>0){
+    const id = setInterval(() => {
+      setTime((prevTime) => prevTime - 1);
+    }, 1000);
+    setIntervalId(id);
+    return () => clearInterval(id);
+  }
+  }, [time]);
+
+  // useEffect(()=>{
+  //   function tickDown(time){
+  //     if (time<1){
+  //       clearInterval(id)
+  //     }
+  //     time = time-1;
+  //   }
+  //   const id = setInterval((tickDown(timer), 1000))
+  // },[])
+
 
   function submitNewPlayer(newPlayer) {
     fetch("/addplayer", {
@@ -60,11 +85,11 @@ export default function CurrentGame({ user }) {
       }
     });
   }
-
+  
   function handleAddTeamB(){
-
+    
   }
-
+  
   function showAClue(){
     if (activeGame.teams && activeGame.teams[0]){
       setCurrentClue(activeGame.teams[0].clues[Math.floor(Math.random()*activeGame.teams[0].clues.length)])
@@ -75,8 +100,8 @@ export default function CurrentGame({ user }) {
       setCurrentClue(activeGame.teams[1].clues[Math.floor(Math.random()*activeGame.teams[1].clues.length)])
     }
   }
-
-  function generateActor(){
+  
+  function generateAActor(){
     if (activeGame.teams && activeGame.teams[0]){
       setActor(activeGame.teams[0].members[Math.floor(Math.random()*activeGame.teams[0].members.length)].nickname)
     }
@@ -88,9 +113,9 @@ export default function CurrentGame({ user }) {
   }
 
   function minimize() {}
-
+  
   function maximize() {}
-
+  
   function onClose() {}
   return (
     <>
@@ -123,14 +148,14 @@ export default function CurrentGame({ user }) {
               <button
                 id="add-player-b-btn"
                 onClick={() => setShowAddPlayer(!showAddPlayer)}
-              >
+                >
                 {showAddPlayer ? "Minimize" : "Add Player"}
               </button>
               <div className="add-player-container">
                 {showAddPlayer ? (
                   <AddPlayer
-                    handleAddPlayer={submitNewPlayer}
-                    activeGame={activeGame}
+                  handleAddPlayer={submitNewPlayer}
+                  activeGame={activeGame}
                   />
                 ) : null}
               </div>
@@ -153,29 +178,36 @@ export default function CurrentGame({ user }) {
             <div className="team-info left">
               <ul>
                 {/* generate clue here */}
-                <button onClick={showAClue}>Generate Clue</button>
                 <button className="choose-player" onClick={generateBActor}>Generate Actor</button>
-               
+                
+                <button
+                id="start-game-btn"
+                onClick={()=>setRoundTeam("A")}
+              >
+                Team A: Start Round
+              </button>
               </ul>
             </div>
             <div className="chat-box">
               <div className="current-actor">{actor ? `${actor}, you're up!` : "Chosen actor will appear here"}</div>
               <div className="current-clue-container">{currentClue ? currentClue : "Clue Will Appear Here"}</div>
+              {roundTeam==="A" ? <button onClick={showAClue}>Next Clue</button> : roundTeam==="B" ? <button onClick={showBClue}>Next Clue</button> : null}
               </div>
               
             <div className="team-info right">
               <ul>
-              <button onClick={showBClue}>Generate Clue</button>
-              <button className="choose-player" onClick={generateActor}>Generate Actor</button>
+              <button className="choose-player" onClick={generateAActor}>Generate Actor</button>
+             
+              <button
+                id="start-game-btn"
+                onClick={()=>setRoundTeam("B")}
+              >
+                Team B: Start Round
+              </button>
               </ul>
             </div>
           </div>
-            <button
-                id="start-game-btn"
-                onClick={() => console.log("startRound")}
-              >
-                Start Game
-              </button>
+          <p>{time === 0 ? "Time's Up" : time}</p>
         </div>
       </div>
 : <p>You do not have an active game</p> }
@@ -183,11 +215,12 @@ export default function CurrentGame({ user }) {
   );
 }
 
+
 //works but old formatting
 // return (
-//   <>
-//     <button onClick={() => setShow(!show)}>{show ? "hide" : "show"}</button>
-//     <div style={{ display: show ? "block" : "none" }}>
+  //   <>
+  //     <button onClick={() => setShow(!show)}>{show ? "hide" : "show"}</button>
+  //     <div style={{ display: show ? "block" : "none" }}>
 //       <div id="modal-header">
 //         <h2>Salad Bowl</h2>
 //       </div>

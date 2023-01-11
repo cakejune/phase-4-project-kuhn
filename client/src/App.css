@@ -141,3 +141,50 @@
 .current-clue-container {
   border-style: groove;
 }
+
+
+/* CS LOBBY
+
+.lobby-list {
+  width: 500px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 0 auto;
+}
+
+.lobby-list-header {
+  background-color: #eee;
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.lobby-list-header h3 {
+  margin: 0;
+}
+
+.lobby-list-body {
+  padding: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #ddd;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+} */
